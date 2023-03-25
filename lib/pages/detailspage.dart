@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_prak_tpm_1/data/disease_data.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:logging/logging.dart';
 
 List<Diseases> diseases = listDisease;
 final disease = listDisease;
+final Logger logger = Logger('URL Launcher');
 
 class Detailspage extends StatefulWidget {
   const Detailspage({Key? key, required this.index}) : super(key: key);
@@ -177,10 +179,16 @@ class _DetailspageState extends State<Detailspage> {
   }
 
   Future<void> _launch(Uri url) async {
-    if (await canLaunchUrl(url)) {
-      await launchUrl(url);
-    } else {
-      throw 'Could not launch $url';
+    String concatenate = url.origin + url.path;
+    Uri finalURL = Uri.parse(concatenate);
+    try {
+      if (await canLaunchUrl(finalURL)) {
+        await launchUrl(finalURL);
+      } else {
+        throw 'Could not launch $url';
+      }
+    } catch (e) {
+      logger.severe('Error launching URL: $e');
     }
   }
 }
