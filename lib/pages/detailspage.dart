@@ -173,7 +173,7 @@ class _DetailspageState extends State<Detailspage> {
           _launch(query);
         },
         tooltip: 'Open Image',
-        child: const Icon(Icons.menu_open),
+        child: const Icon(Icons.open_in_browser),
       ),
     );
   }
@@ -181,6 +181,7 @@ class _DetailspageState extends State<Detailspage> {
   Future<void> _launch(Uri url) async {
     String concatenate = url.origin + url.path;
     Uri finalURL = Uri.parse(concatenate);
+    // print(' concatenate : $concatenate');
     try {
       if (await canLaunchUrl(finalURL)) {
         await launchUrl(finalURL);
