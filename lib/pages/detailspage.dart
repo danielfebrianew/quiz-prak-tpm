@@ -173,7 +173,7 @@ class _DetailspageState extends State<Detailspage> {
           _launch(query);
         },
         tooltip: 'Open Image',
-        child: const Icon(Icons.open_in_browser),
+        child: const Icon(Icons.folder_open),
       ),
     );
   }
